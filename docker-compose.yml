@@ -1,0 +1,46 @@
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: jesse-n8n
+    restart: always
+    network_mode: "host"
+    env_file: .env
+
+    environment:
+      # =========================
+      # Server Configuration (Non-sensitive)
+      # =========================
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - WEBHOOK_URL=http://localhost:5678/
+      - N8N_EDITOR_BASE_URL=http://localhost:5678
+
+      # =========================
+      # Timezone
+      # =========================
+      - GENERIC_TIMEZONE=Asia/Karachi
+
+      # =========================
+      # Execution Settings
+      # =========================
+      - EXECUTIONS_DATA_SAVE_ON_ERROR=all
+      - EXECUTIONS_DATA_SAVE_ON_SUCCESS=all
+      - EXECUTIONS_DATA_SAVE_MANUAL_EXECUTIONS=true
+      - EXECUTIONS_DATA_PRUNE=true
+      - EXECUTIONS_DATA_MAX_AGE=336
+
+      # =========================
+      # Workflow Settings
+      # =========================
+      - WORKFLOWS_DEFAULT_NAME=Jesse Automation
+
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - ./local-files:/files
+
+volumes:
+  n8n_data:
+    driver: local
+    name: jesse_n8n_data
+
