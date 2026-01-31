@@ -26,11 +26,6 @@ primary_region = 'sin'
   min_machines_running = 0
   processes = ['app']
 
-[mounts]
-  source = "n8n_data"
-  destination = "/home/node/.n8n"
-  processes = ["app"]
-
 [[vm]]
   memory = '1gb'
   cpus = 1
