@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for jesse-little on 2026-01-31T22:53:56+05:00
+# fly.toml app configuration file generated for usaha-ai on 2026-01-31T22:53:56+05:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'jesse-little'
+app = 'usaha-ai'
 primary_region = 'sin'
 
 [build]
@@ -18,12 +18,12 @@ primary_region = 'sin'
   EXECUTIONS_DATA_SAVE_ON_ERROR = "all"
   EXECUTIONS_DATA_SAVE_ON_SUCCESS = "all"
   GENERIC_TIMEZONE = "Asia/Karachi"
-  N8N_EDITOR_BASE_URL = "https://jesse-little.fly.dev"
+  N8N_EDITOR_BASE_URL = "https://usaha-ai.fly.dev"
   N8N_HOST = "0.0.0.0"
   N8N_PORT = "5678"
   N8N_PROTOCOL = "https"
   PORT = "5678"
-  WEBHOOK_URL = "https://jesse-little.fly.dev/"
+  WEBHOOK_URL = "https://usaha-ai.fly.dev/"
   WORKFLOWS_DEFAULT_NAME = "AivexaLabs Workflow"
 
 [[mounts]]
