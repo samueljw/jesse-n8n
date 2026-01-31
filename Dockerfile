@@ -1,38 +1,24 @@
-# Stage 1: Build the Application
-# We use node:20 as the base for building and installing dependencies.
-FROM node:20 AS build
+# Use official Node.js 20 runtime as base
+FROM node:20
 
-# Set the working directory inside the container
+# Set working directory
 WORKDIR /usr/src/app
 
-# Copy package.json and package-lock.json first to leverage Docker caching.
-# If these files don't change, subsequent builds can skip 'npm install'.
+# Copy package files first to leverage Docker cache
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm install --production
 
-# Copy the rest of the application source code
+# Copy the rest of the app source
 COPY . .
-
-# Stage 2: Create the Final Production Image
-# We use node:20 as the runtime image with all the necessary tools.
-FROM node:20
-
-# Set the working directory
-WORKDIR /usr/src/app
-
-# Copy the node_modules and built application files from the 'build' stage
-COPY --from=build /usr/src/app/node_modules ./node_modules
-COPY --from=build /usr/src/app/package*.json ./
-COPY --from=build /usr/src/app .
 
 # Expose the port your app runs on
 ENV PORT=8080
 EXPOSE $PORT
 
-# Run the application using the non-root user (recommended for security)
+# Run the application as non-root user for security
 USER node
 
-# Define the command to start your application
-CMD [ "node", "index.js" ]
+# Start the app
+CMD ["node", "index.js"]
