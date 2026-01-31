@@ -4,17 +4,45 @@ services:
     container_name: jesse-n8n
     restart: always
     network_mode: "host"
-    env_file: .env
 
     environment:
       # =========================
-      # Server Configuration (Non-sensitive)
+      # Database Configuration
+      # =========================
+      - DB_TYPE=postgresdb
+      - DB_POSTGRESDB_HOST=localhost
+      - DB_POSTGRESDB_PORT=5432
+      - DB_POSTGRESDB_DATABASE=jesse_n8n
+      - DB_POSTGRESDB_USER=jesse_user
+      - DB_POSTGRESDB_PASSWORD=password
+
+      # =========================
+      # Security
+      # =========================
+      - N8N_ENCRYPTION_KEY=jesse_32char_encryption_key_xyz123
+      - N8N_BASIC_AUTH_ACTIVE=false
+      - N8N_BASIC_AUTH_USER=admin
+      - N8N_BASIC_AUTH_PASSWORD=password
+
+      # =========================
+      # Server Configuration
       # =========================
       - N8N_HOST=localhost
       - N8N_PORT=5678
       - N8N_PROTOCOL=http
       - WEBHOOK_URL=http://localhost:5678/
       - N8N_EDITOR_BASE_URL=http://localhost:5678
+
+      # =========================
+      # Email / SMTP (Password Reset)
+      # =========================
+      - N8N_EMAIL_MODE=smtp
+      - N8N_SMTP_HOST=smtp.gmail.com
+      - N8N_SMTP_PORT=587
+      - N8N_SMTP_USER=naumankhan642@gmail.com
+      - N8N_SMTP_PASS=uhhs lkol uvhm iyeh
+      - N8N_SMTP_SENDER=jesse <naumankhan642@gmail.com>
+      - N8N_SMTP_SSL=false
 
       # =========================
       # Timezone
@@ -33,7 +61,7 @@ services:
       # =========================
       # Workflow Settings
       # =========================
-      - WORKFLOWS_DEFAULT_NAME=Jesse Automation
+      - WORKFLOWS_DEFAULT_NAME=jesse default
 
     volumes:
       - n8n_data:/home/node/.n8n
