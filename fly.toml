@@ -12,6 +12,11 @@ primary_region = 'sin'
 [env]
   N8N_HOST = "0.0.0.0"
   N8N_PORT = "5678"
+  # Recommended by n8n to clear deprecation warnings
+  DB_SQLITE_POOL_SIZE = "4"
+  N8N_RUNNERS_ENABLED = "true"
+  N8N_BLOCK_ENV_ACCESS_IN_NODE = "false"
+  N8N_GIT_NODE_DISABLE_BARE_REPOS = "true"
 
 [http_service]
   internal_port = 5678
