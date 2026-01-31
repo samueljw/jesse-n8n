@@ -10,8 +10,9 @@ primary_region = 'sin'
   dockerfile = "Dockerfile"
 
 [env]
-  N8N_HOST = "0.0.0.0"
+  N8N_HOST = "jesse-n8n.fly.dev"
   N8N_PORT = "5678"
+  N8N_PROTOCOL = "https"
   # Recommended by n8n to clear deprecation warnings
   DB_SQLITE_POOL_SIZE = "4"
   N8N_RUNNERS_ENABLED = "true"
