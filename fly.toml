@@ -1,55 +1,55 @@
-app = "jesse"
-primary_region = "sin"
+app = 'jesse-n8n'
+primary_region = 'sin'
+kill_signal = 'SIGINT'
+kill_timeout = '5s'
 
 [build]
-  image = "n8nio/n8n:latest"
+  image = 'n8nio/n8n:latest'
 
 [env]
-  # n8n server settings
-  PORT = "5678"
-  N8N_HOST = "jesse.fly.dev"
-  N8N_PORT = "5678"
-  N8N_PROTOCOL = "https"
-  WEBHOOK_URL = "https://jesse.fly.dev/"
-  N8N_EDITOR_BASE_URL = "https://jesse.fly.dev"
+  EXECUTIONS_DATA_MAX_AGE = '168'
+  EXECUTIONS_DATA_PRUNE = 'true'
+  GENERIC_TIMEZONE = 'Asia/Jakarta'
+  N8N_DIAGNOSTICS_ENABLED = 'false'
+  N8N_HIRING_BANNER_ENABLED = 'false'
+  N8N_HOST = 'jesse-n8n.fly.dev'
+  N8N_PORT = '5678'
+  N8N_PROTOCOL = 'https'
+  TINI_SUBREAPER = 'true'
+  WEBHOOK_URL = 'https://jesse-n8n.fly.dev'
 
-  # Timezone
-  GENERIC_TIMEZONE="America/New_York"
+[[mounts]]
+  source = 'n8n_data'
+  destination = '/home/node/.n8n'
 
-
-  # Workflow execution settings
-  EXECUTIONS_DATA_SAVE_ON_ERROR = "all"
-  EXECUTIONS_DATA_SAVE_ON_SUCCESS = "all"
-  EXECUTIONS_DATA_SAVE_MANUAL_EXECUTIONS = "true"
-  EXECUTIONS_DATA_PRUNE = "true"
-  EXECUTIONS_DATA_MAX_AGE = "336"
-
-  # Default workflow name
-  WORKFLOWS_DEFAULT_NAME = "AivexaLabs Workflow"
-
-  # Database type (Postgres)
-  DB_TYPE = "postgresdb"
-  # Note: DATABASE_URL is set as a secret, not here
-
-  # Security and auth
-  # Secrets are set via `fly secrets`:
-  # N8N_ENCRYPTION_KEY, N8N_BASIC_AUTH_ACTIVE, N8N_BASIC_AUTH_USER, N8N_BASIC_AUTH_PASSWORD
-
-  # Email/SMTP (also via secrets)
-  # N8N_EMAIL_MODE, N8N_SMTP_HOST, N8N_SMTP_PORT, N8N_SMTP_USER, N8N_SMTP_PASS, N8N_SMTP_SENDER, N8N_SMTP_SSL
-
-[mounts]
-  source = "n8n_data"
-  destination = "/home/node/.n8n"
-
-[http_service]
+[[services]]
+  protocol = 'tcp'
   internal_port = 5678
-  force_https = true
-  auto_start_machines = true
+  processes = ['app']
   auto_stop_machines = true
-  min_machines_running = 1
+  auto_start_machines = true
+  min_machines_running = 0
+
+  [[services.ports]]
+    port = 443
+    handlers = ['tls', 'http']
+
+  [[services.ports]]
+    port = 80
+    handlers = ['http']
+    force_https = true
+
+  [services.concurrency]
+    type = 'connections'
+    hard_limit = 100
+    soft_limit = 50
+
+  [[services.tcp_checks]]
+    interval = '15s'
+    timeout = '2s'
+    grace_period = '1s'
 
 [[vm]]
-  memory = "1gb"
+  cpu_kind = 'shared'
   cpus = 1
-
+  memory_mb = 1024
