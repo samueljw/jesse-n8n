@@ -8,9 +8,9 @@ EXPOSE 5678
 ENV N8N_PORT=5678
 ENV N8N_HOST=0.0.0.0
 
-# Health check
+# Health check (exec form - distroless image has no /bin/sh)
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
-    CMD node -e "require('http').get('http://localhost:5678/api/v1/health', (r) => {if (r.statusCode !== 200) throw new Error(r.statusCode)})" || exit 1
+    CMD ["node", "-e", "require('http').get('http://localhost:5678/api/v1/health', r => process.exit(r.statusCode === 200 ? 0 : 1)).on('error', () => process.exit(1));"]
 
-# Use the entrypoint from the n8n image and start n8n
-CMD ["/bin/sh", "-c", "n8n start"]
+# Run n8n directly (no shell - distroless image has no /bin/sh)
+CMD ["n8n", "start"]
