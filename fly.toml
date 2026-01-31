@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for usaha-ai on 2026-01-31T22:53:56+05:00
+# fly.toml app configuration file generated for usaha-ai on 2026-01-31T23:16:35+05:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -10,21 +10,20 @@ primary_region = 'sin'
   image = 'n8nio/n8n:latest'
 
 [env]
-  # Use SQLite (no Postgres on Fly unless you add a separate Postgres app)
-  DB_TYPE = "sqlite"
-  EXECUTIONS_DATA_MAX_AGE = "336"
-  EXECUTIONS_DATA_PRUNE = "true"
-  EXECUTIONS_DATA_SAVE_MANUAL_EXECUTIONS = "true"
-  EXECUTIONS_DATA_SAVE_ON_ERROR = "all"
-  EXECUTIONS_DATA_SAVE_ON_SUCCESS = "all"
-  GENERIC_TIMEZONE = "Asia/Karachi"
-  N8N_EDITOR_BASE_URL = "https://usaha-ai.fly.dev"
-  N8N_HOST = "0.0.0.0"
-  N8N_PORT = "5678"
-  N8N_PROTOCOL = "https"
-  PORT = "5678"
-  WEBHOOK_URL = "https://usaha-ai.fly.dev/"
-  WORKFLOWS_DEFAULT_NAME = "AivexaLabs Workflow"
+  DB_TYPE = 'sqlite'
+  EXECUTIONS_DATA_MAX_AGE = '336'
+  EXECUTIONS_DATA_PRUNE = 'true'
+  EXECUTIONS_DATA_SAVE_MANUAL_EXECUTIONS = 'true'
+  EXECUTIONS_DATA_SAVE_ON_ERROR = 'all'
+  EXECUTIONS_DATA_SAVE_ON_SUCCESS = 'all'
+  GENERIC_TIMEZONE = 'Asia/Karachi'
+  N8N_EDITOR_BASE_URL = 'https://usaha-ai.fly.dev'
+  N8N_HOST = '0.0.0.0'
+  N8N_PORT = '5678'
+  N8N_PROTOCOL = 'https'
+  PORT = '5678'
+  WEBHOOK_URL = 'https://usaha-ai.fly.dev/'
+  WORKFLOWS_DEFAULT_NAME = 'usaha defalut'
 
 [[mounts]]
   source = 'n8n_data'

@@ -38,7 +38,7 @@ services:
       # =========================
       # Timezone
       # =========================
-      - GENERIC_TIMEZONE=Asia/Karachi
+      - GENERIC_TIMEZONE=Asia/Jakarta
 
       # =========================
       # Execution Settings
@@ -48,11 +48,6 @@ services:
       - EXECUTIONS_DATA_SAVE_MANUAL_EXECUTIONS=true
       - EXECUTIONS_DATA_PRUNE=true
       - EXECUTIONS_DATA_MAX_AGE=336
-
-      # =========================
-      # Workflow Settings
-      # =========================
-      - WORKFLOWS_DEFAULT_NAME=usaha Workflow
 
     volumes:
       - n8n_data:/home/node/.n8n
