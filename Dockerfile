@@ -1,24 +1,18 @@
-# Use official Node.js 20 runtime as base
-FROM node:20
+# Use official n8n image
+FROM n8nio/n8n:latest
 
 # Set working directory
-WORKDIR /usr/src/app
+WORKDIR /home/node/.n8n
 
-# Copy package files first to leverage Docker cache
-COPY package*.json ./
+# Expose the port
+EXPOSE 5678
 
-# Install dependencies
-RUN npm install --production
+# Load env variables from .env file
+ENV N8N_PORT=5678
 
-# Copy the rest of the app source
-COPY . .
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+    CMD node -e "require('http').get('http://localhost:5678/api/v1/health', (r) => {if (r.statusCode !== 200) throw new Error(r.statusCode)})"
 
-# Expose the port your app runs on
-ENV PORT=8080
-EXPOSE $PORT
-
-# Run the application as non-root user for security
-USER node
-
-# Start the app
-CMD ["node", "index.js"]
+# Start n8n
+CMD ["n8n", "start"]
