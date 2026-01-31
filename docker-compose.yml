@@ -40,7 +40,7 @@ services:
       - N8N_SMTP_HOST=smtp.gmail.com
       - N8N_SMTP_PORT=587
       - N8N_SMTP_USER=naumankhan642@gmail.com
-      - N8N_SMTP_PASS=uhhs lkol uvhm iyeh
+      - N8N_SMTP_PASS=${N8N_SMTP_PASS}
       - N8N_SMTP_SENDER=jesse <naumankhan642@gmail.com>
       - N8N_SMTP_SSL=false
 
