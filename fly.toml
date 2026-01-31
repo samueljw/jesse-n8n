@@ -7,13 +7,18 @@ app = 'jesse-n8n'
 primary_region = 'sin'
 
 [build]
+  dockerfile = "Dockerfile"
+
+[env]
+  N8N_HOST = "0.0.0.0"
+  N8N_PORT = "5678"
 
 [http_service]
   internal_port = 5678
   force_https = true
   auto_stop_machines = 'stop'
   auto_start_machines = true
-  min_machines_running = 0
+  min_machines_running = 1
   processes = ['app']
 
 [[vm]]
